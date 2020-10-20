@@ -31,31 +31,46 @@ var ball_options={
    density:1.2
  }
  
- 
- Matter.Bodies.circle(100,400,10,ball_options);
- 
+ this.body= Matter.Bodies.circle(100,450,10,ball_options);
+ World.add(world,this.body)
+
  ground = Bodies.rectangle(900, 400, width, 10 , {isStatic:false} );
  World.add(world, ground);
 
-	Engine.run(engine);
+ Engine.run(engine);
   
 }
-
 
 function draw() {
   Engine.update(engine);
 
    background(0);
 
+   fill("white")
+   ellipseMode(RADIUS)
+   ellipse(this.body.position.x,this.body.position.y,10,10)
 
   holder1.display();
   holder2.display();
   holder3.display();
 
-
+     
   drawSprites();
  
 }
+
+function keyPressed(){
+  if(keyCode===UP_ARROW){
+Matter.Body.applyForce(this.body,this.body.position,{x:18,y:-18})
+Matter.Body.setStatic(this.body,false)  
+  }
+}
+
+
+
+
+
+
 
 
 
